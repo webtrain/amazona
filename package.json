@@ -1,0 +1,23 @@
+{
+  "name": "amazona",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webtrain/amazona.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webtrain/amazona/issues"
+  },
+  "homepage": "https://github.com/webtrain/amazona#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
