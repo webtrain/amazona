@@ -1,38 +1,37 @@
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import data from './products';
-import Product from './components/Product';
+import { HomeScreen, ProductScreen } from './screens';
+
 
 function App() {
   return (
-    <div classNameName="App">
-      <div className="grid-container">
-        <header className="row">
-          <div>
-            <a className="brand" href="/">
-              amazona
-            </a>
-          </div>
-          <div>
-            <a href="/cart">cart</a>
-            <a href="/signin">sign in</a>
-          </div>
-        </header>
-
-        <main>
-          <div className="row center">
-            <div className="products-wrapper">
-              {data.products.map((product) => (
-                <Product key={product.id} {...product} />
-              ))}
+    <BrowserRouter>
+      <div className="App">
+        <div className="grid-container">
+          <header className="row">
+            <div>
+              <a className="brand" href="/">
+                amazona
+              </a>
             </div>
-          </div>
-        </main>
+            <div>
+              <a href="/cart">cart</a>
+              <a href="/signin">Sign in</a>
+            </div>
+          </header>
 
-        <footer className="row center">
-          <p>all rights reserved &copy; | 2020</p>
-        </footer>
+          <main>
+            <Route path="/" component={HomeScreen} exact></Route>
+            <Route path="/product/:id" component={ProductScreen} exact></Route>
+          </main>
+
+          <footer className="row center">
+            <p>all rights reserved &copy; | 2020</p>
+          </footer>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

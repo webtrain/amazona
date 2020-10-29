@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      __id: 1,
+      _id: 1,
       name: 'apple watch',
       category: 'watch',
       image: '/img/product-2.jpg',
@@ -10,9 +10,10 @@ const data = {
       rating: 4.5,
       numReviews: 1299,
       description: 'The future is on your wrist.',
+      countInStock: 10,
     },
     {
-      __id: 2,
+      _id: 2,
       name: 'Sony headphone',
       category: 'headphone',
       image: '/img/product-5.jpg',
@@ -21,9 +22,10 @@ const data = {
       rating: 4,
       numReviews: 869,
       description: 'high quality headphone',
+      countInStock: 20,
     },
     {
-      __id: 3,
+      _id: 3,
       name: 'Nike shoe',
       category: 'shoe',
       image: '/img/product-7.jpg',
@@ -32,9 +34,10 @@ const data = {
       rating: 4,
       numReviews: 2551,
       description: 'high quality street shoe',
+      countInStock: 0,
     },
     {
-      __id: 4,
+      _id: 4,
       name: 'amazon echo',
       category: 'electronics',
       image: '/img/product-11.jpg',
@@ -43,9 +46,10 @@ const data = {
       rating: 5,
       numReviews: 136,
       description: 'high quality home product',
+      countInStock: 42,
     },
     {
-      __id: 5,
+      _id: 5,
       name: 'apple air pod',
       category: 'air pod',
       image: '/img/product-19.jpg',
@@ -54,6 +58,7 @@ const data = {
       rating: 4.5,
       numReviews: 7524,
       description: 'high quality headphone',
+      countInStock: 31,
     },
   ],
 };

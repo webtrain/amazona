@@ -1,11 +1,11 @@
 import React from 'react';
 import Rating from './Rating';
 
-const Product = ({ __id, image, name, price, rating, numReviews }) => {
+const Product = ({ _id, image, name, price, rating, numReviews }) => {
   return (
     <div className="card">
-      <a href={`/product/${__id}`}>
-        <img className="medium" src={image} alt={`${name}-image`} />
+      <a href={`/product/${_id}`}>
+        <img className="medium" src={image} alt={name} />
       </a>
       <div className="card-body">
         <a href="product.html">

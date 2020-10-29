@@ -1,3 +1,5 @@
+@import './mixins';
+
 * {
   margin: 0;
   padding: 0;
@@ -14,11 +16,19 @@ body {
 }
 
 /* Commons */
+img {
+  width: 100%;
+}
+
 a {
   text-decoration: none;
   // &:hover {
   //   color: #ff8000;
   // }
+}
+
+ul {
+  list-style: none;
 }
 
 .row {
@@ -32,6 +42,81 @@ a {
     text-transform: capitalize;
     justify-content: center;
   }
+
+  &.top {
+    // align-items: flex-start;
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    gap: 1rem;
+    align-items: flex-start;
+    height: 100%;
+    margin: 1rem 0;
+
+    .col-1 {
+      @include rating;
+      .card {
+        max-width: 400px;
+      }
+      ul {
+        li {
+          h1 {
+            text-transform: capitalize;
+          }
+          p {
+            margin: 0.5rem 0;
+            &::first-letter {
+              text-transform: capitalize;
+            }
+          }
+        }
+
+        li:not(:last-child) {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .card-body {
+        padding: 1rem;
+        background-color: rgb(245, 245, 245);
+        border-radius: 5px;
+
+        li {
+          button {
+            padding: 0.5rem 1rem;
+            // background: #f8d272;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            display: flex;
+            margin: 0 auto;
+            cursor: pointer;
+
+            &.primary {
+              background-color: #f0c040;
+            }
+            &.block {
+              width: 100%;
+              justify-content: center;
+            }
+
+            &:hover {
+              background-color: darken(#f0c040, 10%);
+            }
+          }
+        }
+      }
+    }
+
+    .col-2 {
+    }
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      .card {
+        margin: 0 auto;
+      }
+    }
+  }
 }
 
 .grid-container {
@@ -42,7 +127,7 @@ a {
     'footer';
   grid-template-columns: 1fr;
   grid-template-rows: 3rem 1fr 3rem;
-  height: 100%;
+  min-height: 100vh;
 }
 
 header {
@@ -95,6 +180,10 @@ main {
         object-fit: cover;
       }
 
+      .large {
+        width: 100%;
+      }
+
       &-body {
         padding: 1rem;
         text-align: left;
@@ -106,32 +195,30 @@ main {
         h1 {
           font-size: 1.8rem;
           padding: 1rem 0;
+          
         }
 
         h2 {
           font-size: 1.6rem;
           padding: 1rem 0;
+          color: initial;
         }
 
         .rating {
-          span {
-            color: rgb(253, 190, 30);
-            &:not(:last-child) {
-              margin-right: 0.1rem;
-            }
-
-            &:last-child {
-              color: initial;
-              font-size: 0.7rem;
-              margin-left: 1rem;
-            }
-          }
+          @include rating;
         }
         .price {
         }
       }
     }
   }
+}
+
+.success {
+  color: #20a020 !important;
+}
+.error {
+  color: #a02020 !important;
 }
 
 footer {

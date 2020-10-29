@@ -1,0 +1,14 @@
+@mixin rating {
+  span {
+    color: rgb(253, 190, 30);
+    &:not(:last-child) {
+      margin-right: 0.1rem;
+    }
+
+    &:last-child {
+      color: initial;
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+    }
+  }
+}
