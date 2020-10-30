@@ -1,4 +1,5 @@
 @import './mixins';
+@import './spinner';
 
 * {
   margin: 0;
@@ -195,7 +196,6 @@ main {
         h1 {
           font-size: 1.8rem;
           padding: 1rem 0;
-          
         }
 
         h2 {
@@ -219,6 +219,26 @@ main {
 }
 .error {
   color: #a02020 !important;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.alert-info {
+  background: #f5f7ab;
+  color: #5c5e1c;
+}
+
+.alert-success {
+  background: #b8ffc7;
+  color: #2d743c;
+}
+
+.alert-error {
+  background: #ffb6b6;
+  color: #741717;
 }
 
 footer {
