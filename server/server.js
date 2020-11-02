@@ -1,5 +1,5 @@
 import express from 'express';
-import products from './products.js';
+import data from './products.js';
 
 const app = express();
 
@@ -8,7 +8,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/products', (req, res) => {
-  res.send(products.products);
+  res.send(data.products);
+});
+
+app.get('/api/products/:id', (req, res) => {
+  const product = data.products.find((item) => item._id == req.params.id);
+  
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product not  find' });
+  }
 });
 
 const PORT = process.env.PORT || 5000;

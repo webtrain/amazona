@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { HomeScreen, ProductScreen } from './screens';
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -22,8 +21,8 @@ function App() {
           </header>
 
           <main>
-            <Route path="/" component={HomeScreen} exact></Route>
-            <Route path="/product/:id" component={ProductScreen} exact></Route>
+            <Route exact path="/" component={HomeScreen}></Route>
+            <Route exact path="/product/:id" component={ProductScreen}></Route>
           </main>
 
           <footer className="row center">
