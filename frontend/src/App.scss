@@ -38,6 +38,12 @@ ul {
   justify-content: space-between;
   align-items: center;
 
+  #qty {
+    padding: 0.2rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+  }
+
   &.center {
     text-align: center;
     text-transform: capitalize;
@@ -152,6 +158,19 @@ header {
       // box-shadow: 0 0 1pt 0pt #fff;
       border: 1px solid #fff;
       border-radius: 3px;
+    }
+  }
+  .cart {
+    position: relative;
+    .badge {
+      position: absolute;
+      font-size: 0.8rem;
+      background: gold;
+      padding: 0.1rem 0.3rem;
+      border-radius: 50%;
+      color: initial;
+      top: 0;
+      right: -7px;
     }
   }
 }

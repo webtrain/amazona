@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { detailsProduct } from '../actions/productActions';
@@ -7,6 +7,7 @@ import Rating from '../components/Rating';
 
 const ProductScreen = (props) => {
   const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
   const productId = props.match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -14,6 +15,10 @@ const ProductScreen = (props) => {
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
+
+  const addToCartHandler = () => {
+    props.history.push(`/cart/${productId}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -66,9 +71,29 @@ const ProductScreen = (props) => {
                       </div>
                     </div>
                   </li>
-                  <li>
-                    <button className="primary block">Add to Cart</button>
-                  </li>
+                  {product.countInStock > 0 && (
+                    <>
+                      <li>
+                        <div className="row">
+                          <div>Qty</div>
+                          <div>
+                            <select name="" id="qty" value={qty} onChange={(e) => setQty(e.target.value)}>
+                              {[...Array(product.countInStock).keys()].map((item) => (
+                                <option key={item + 1} value={item + 1}>
+                                  {item + 1}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <button className="primary block" onClick={addToCartHandler}>
+                          Add to Cart
+                        </button>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
