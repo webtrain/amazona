@@ -1,7 +1,23 @@
+import bcrypt from 'bcryptjs';
+
 const data = {
+  users: [
+    {
+      name: 'admin',
+      email: 'admin@example.com',
+      password: bcrypt.hashSync('1234x', 8),
+      isAdmin: true,
+    },
+    {
+      name: 'john',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: false,
+    },
+  ],
+
   products: [
     {
-      _id: 1,
       name: 'apple watch',
       category: 'watch',
       image: '/img/product-2.jpg',
@@ -13,7 +29,6 @@ const data = {
       countInStock: 10,
     },
     {
-      _id: 2,
       name: 'Sony headphone',
       category: 'headphone',
       image: '/img/product-5.jpg',
@@ -25,7 +40,6 @@ const data = {
       countInStock: 20,
     },
     {
-      _id: 3,
       name: 'Nike shoe',
       category: 'shoe',
       image: '/img/product-7.jpg',
@@ -37,7 +51,6 @@ const data = {
       countInStock: 0,
     },
     {
-      _id: 4,
       name: 'amazon echo',
       category: 'electronics',
       image: '/img/product-11.jpg',
@@ -49,7 +62,6 @@ const data = {
       countInStock: 42,
     },
     {
-      _id: 5,
       name: 'apple air pod',
       category: 'air pod',
       image: '/img/product-19.jpg',
