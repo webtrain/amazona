@@ -206,7 +206,7 @@ ul {
 .signIn-form {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   .form {
     font-size: 1.1rem;
@@ -309,10 +309,12 @@ header {
     display: none;
     position: absolute;
     bottom: -48px;
-    width: 100px;
+    right:0;
     padding: 0.5rem;
     background: #203040;
     border-radius: 3px;
+    width: 120px;
+    text-align: center;
 
     a {
       border: none;
