@@ -1,12 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { signOut } from './actions/userActions';
 import './App.css';
-import { HomeScreen, ProductScreen, CartScreen } from './screens';
+import { HomeScreen, ProductScreen, CartScreen, SigInScreen } from './screens';
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userSignIn = useSelector((state) => state.userSignIn);
+  const { userInfo } = userSignIn;
+  const dispatch = useDispatch();
+
+  const signOutHandler = () => {
+    dispatch(signOut());
+  };
 
   return (
     <BrowserRouter>
@@ -19,8 +27,23 @@ function App() {
               </Link>
             </div>
             <div>
-              <Link to="/cart" className="cart">cart {cartItems.length > 0 && <span className="badge">{cartItems.length}</span>}</Link>
-              <Link to="/signin">Sign in</Link>
+              <Link to="/cart" className="cart">
+                cart {cartItems.length > 0 && <span className="badge">{cartItems.length}</span>}
+              </Link>
+              {userInfo ? (
+                <div className="dropdown">
+                  <Link to="#">
+                    {userInfo.name} <i className="fa fa-caret-down"></i>
+                  </Link>
+                  <ul className="dropdown-content">
+                    <Link to="#signout" onClick={signOutHandler}>
+                      Sign out
+                    </Link>
+                  </ul>
+                </div>
+              ) : (
+                <Link to="/signin">Sign in</Link>
+              )}
             </div>
           </header>
 
@@ -28,6 +51,7 @@ function App() {
             <Route exact path="/" component={HomeScreen}></Route>
             <Route path="/product/:id" component={ProductScreen}></Route>
             <Route path="/cart/:id?" component={CartScreen}></Route>
+            <Route path="/signin" component={SigInScreen}></Route>
           </main>
 
           <footer className="row center">

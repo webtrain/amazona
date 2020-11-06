@@ -203,6 +203,63 @@ ul {
   }
 }
 
+.signIn-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  .form {
+    font-size: 1.1rem;
+    max-width: 350px;
+    width: 100%;
+
+    div:first-child {
+      margin-bottom: 2rem;
+    }
+
+    div {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        margin: 0 auto;
+      }
+
+      label {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
+
+      button {
+        @include button;
+
+        &.primary {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+
+    div:last-child {
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: row;
+
+      p {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
 .grid-container {
   display: grid;
   grid-template-areas:
@@ -235,6 +292,31 @@ header {
       // box-shadow: 0 0 1pt 0pt #fff;
       border: 1px solid #fff;
       border-radius: 3px;
+    }
+  }
+  div:last-child {
+    display: inline-block;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: -48px;
+    width: 100px;
+    padding: 0.5rem;
+    background: #203040;
+    border-radius: 3px;
+
+    a {
+      border: none;
+      font-size: 0.8rem;
     }
   }
   .cart {
