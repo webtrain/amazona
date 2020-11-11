@@ -6,6 +6,7 @@ import RegisterScreen from './RegisterScreen';
 import ShippingAddressScreen from './ShippingAddressScreen';
 import PaymentMethodScreen from './PaymentMethodScreen';
 import PlaceOrderScreen from './PlaceOrderScreen';
+import OrderScreen from './OrderScreen';
 
 export {
   HomeScreen,
@@ -16,4 +17,5 @@ export {
   ShippingAddressScreen,
   PaymentMethodScreen,
   PlaceOrderScreen,
+  OrderScreen,
 };

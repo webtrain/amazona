@@ -1,45 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder } from '../actions/orderActions';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import { detailsOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-const PlaceOrderScreen = (props) => {
-  const cart = useSelector((state) => state.cart);
-  const cartItems = cart.cartItems;
-  if (!cart.paymentMethod) {
-    props.history.push('/payment');
-  }
-
-  const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, error, order } = orderCreate;
-
-  const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  cart.itemsPrice = toPrice(cart.cartItems.reduce((acc, cur) => acc + cur.qty * cur.price, 0));
-  cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-  cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
-
+const OrderScreen = (props) => {
+  const orderId = props.match.params.id;
+  const orderDetails = useSelector((state) => state.orderDetails);
+  const { order, loading, error } = orderDetails;
   const dispatch = useDispatch();
 
-  const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
-  };
-
   useEffect(() => {
-    if (success) {
-      props.history.push(`/orders/${order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
-    }
-  }, [dispatch, success, props.history, order]);
+    dispatch(detailsOrder(orderId));
+  }, [dispatch, orderId]);
 
-  return (
+  return loading ? (
+    <LoadingBox />
+  ) : error ? (
+    <MessageBox variant="error">{error}</MessageBox>
+  ) : (
     <div>
-      <CheckoutSteps step1 step2 step3 step4 />
-
+      <h1>Order:</h1>
+      <h2>{order._id}</h2>
       <div className="row order">
         <div className="col-2">
           <ul>
@@ -49,14 +32,19 @@ const PlaceOrderScreen = (props) => {
                 <p>
                   <strong>Name:</strong>
                   <br />
-                  {cart.shippingAddress.fullName}
+                  {order.shippingAddress.fullName}
                 </p>
 
                 <p>
                   <strong>Address:</strong>
-                  <br /> {cart.shippingAddress.address}, {cart.shippingAddress.city},{cart.shippingAddress.postalCode},{' '}
-                  {cart.shippingAddress.country}
+                  <br /> {order.shippingAddress.address}, {order.shippingAddress.city},
+                  {order.shippingAddress.postalCode}, {order.shippingAddress.country}
                 </p>
+                {order.isDelivered ? (
+                  <MessageBox variant="success">Delivered at: {order.deliveredAt}</MessageBox>
+                ) : (
+                  <MessageBox variant="error">Not Delivered</MessageBox>
+                )}
               </div>
             </li>
 
@@ -64,8 +52,13 @@ const PlaceOrderScreen = (props) => {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method: </strong> {cart.paymentMethod}
+                  <strong>Method: </strong> {order.paymentMethod}
                 </p>
+                {order.isPaid ? (
+                  <MessageBox variant="success">Paid at: {order.paidAt}</MessageBox>
+                ) : (
+                  <MessageBox variant="error">Not Paid</MessageBox>
+                )}
               </div>
             </li>
 
@@ -73,7 +66,7 @@ const PlaceOrderScreen = (props) => {
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {cartItems.map((item) => (
+                  {order.orderItems.map((item) => (
                     // console.log(item),
                     <li key={item.product}>
                       <div className="cart-item">
@@ -106,19 +99,19 @@ const PlaceOrderScreen = (props) => {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${cart.itemsPrice.toFixed(2)}</div>
+                  <div>${order.itemsPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${cart.shippingPrice.toFixed(2)}</div>
+                  <div>${order.shippingPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>${cart.taxPrice.toFixed(2)}</div>
+                  <div>${order.taxPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -127,22 +120,10 @@ const PlaceOrderScreen = (props) => {
                     <strong>Order Total:</strong>
                   </div>
                   <div>
-                    <strong>${cart.totalPrice.toFixed(2)}</strong>
+                    <strong>${order.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
-              <li>
-                <button
-                  type="button"
-                  className="primary block"
-                  onClick={placeOrderHandler}
-                  disabled={cart.cartItems.length === 0}
-                >
-                  Place Order
-                </button>
-              </li>
-              {loading && <LoadingBox />}
-              {error && <MessageBox variant="danger">{error}</MessageBox>}
             </ul>
           </div>
         </div>
@@ -151,4 +132,4 @@ const PlaceOrderScreen = (props) => {
   );
 };
 
-export default PlaceOrderScreen;
+export default OrderScreen;
